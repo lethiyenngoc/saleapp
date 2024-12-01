@@ -32,7 +32,7 @@ def add_user(name, username, password, avatar):
     password = str(hashlib.md5(password.encode('utf-8')).hexdigest())
 
     u = User(name=name, username=username, password=password,
-             avatar="https://res.cloudinary.com/dxxwcby8l/image/upload/v1691062682/tkeflqgroeil781yplxt.jpg")
+             avatar="https://res.cloudinary.com/dn8ek8zvk/image/upload/v1720403567/qo7ev9d0qmo7czdsuixr.png")
 
     if avatar:
         res = cloudinary.uploader.upload(avatar)
@@ -43,11 +43,16 @@ def add_user(name, username, password, avatar):
     db.session.commit()
 
 
-def auth_user(username, password):
-    password = str(hashlib.md5(password.encode('utf-8')).hexdigest())
+def auth_user(username, password, role=None):
+    password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
 
-    return User.query.filter(User.username.__eq__(username),
-                             User.password.__eq__(password)).first()
+    u = User.query.filter(User.username.__eq__(username),
+                          User.password.__eq__(password))
+
+    if role:
+        u = u.filter(User.user_role.__eq__(role))
+
+    return u.first()
 
 
 def get_user_by_id(id):

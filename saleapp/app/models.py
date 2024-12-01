@@ -49,7 +49,7 @@ if __name__ == '__main__':
         db.create_all()
 
         u = User(name="admin", username="admin", password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()),
-                 avatar="https://res.cloudinary.com/dxxwcby8l/image/upload/v1691062682/tkeflqgroeil781yplxt.jpg",
+                 avatar="https://res.cloudinary.com/dn8ek8zvk/image/upload/v1720403567/qo7ev9d0qmo7czdsuixr.png",
                  user_role=UserRole.ADMIN)
         db.session.add(u)
         db.session.commit()
